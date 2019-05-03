@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -30,12 +31,14 @@ public class WebViewActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        String url = getIntent().getStringExtra("url");
         wv = (WebView) findViewById(R.id.webView);
         wv.setWebViewClient(new MyWebView());
         wv.getSettings().setLoadsImagesAutomatically(true);
         wv.getSettings().setJavaScriptEnabled(true);
         wv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        wv.loadUrl("http://www.canberra.edu.au/");
+        Log.d("url", url);
+        wv.loadUrl(url);
 
     }
 

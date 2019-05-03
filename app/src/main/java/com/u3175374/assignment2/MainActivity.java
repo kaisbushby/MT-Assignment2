@@ -21,12 +21,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback{
     GoogleMap googleMap;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng StudentResourceCenter = new LatLng(-35.236428, 149.084288);
         LatLng TheHub = new LatLng(-35.23844,149.08452);
         LatLng UCGYM = new LatLng(-35.238318, 149.088285);
-        LatLng StreetViewTop = new LatLng(-35.233653, 149.087192);
+        final LatLng StreetViewTop = new LatLng(-35.233653, 149.087192);
         LatLng StreetViewBottom = new LatLng(-35.238516, 149.089560);
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UC, 13));
@@ -96,14 +96,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Flat markers will rotate when the map is rotated,
         // and change perspective when the map is tilted.
         //------------------------------------------------------------------------------------------
-        final Marker ucMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
-                .position(UC)
-                .flat(true)
-                .rotation(245)
-                .title("University of Canberra")
-                .snippet("Bruce Campus")
-        );
 
         final Marker CentralLocationMarker = googleMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
@@ -115,64 +107,64 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         );
 
         final Marker LibraryMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ico_library))
                 .position(Library)
                 .flat(true)
-                .rotation(245)
+                .rotation(90)
                 .title("Library")
                 .snippet("University of Canberra")
         );
 
         final Marker UCCooperLodgeMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ico_lodge))
                 .position(UCCooperLodge)
                 .flat(true)
-                .rotation(245)
+                .rotation(90)
                 .title("Student Resource Center")
                 .snippet("University of Canberra")
         );
 
         final Marker StudentResourceCenterMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ico_src))
                 .position(StudentResourceCenter)
                 .flat(true)
-                .rotation(245)
+                .rotation(90)
                 .title("Student Resource Center")
                 .snippet("University of Canberra")
         );
 
         final Marker TheHubMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ico_hub))
                 .position(TheHub)
                 .flat(true)
-                .rotation(245)
+                .rotation(90)
                 .title("The Hub")
                 .snippet("University of Canberra")
         );
 
         final Marker UCGymMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ico_gym))
                 .position(UCGYM)
                 .flat(true)
-                .rotation(245)
+                .rotation(90)
                 .title("UC GYM")
                 .snippet("University of Canberra")
         );
 
         final Marker StreetViewTopMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ico_street))
                 .position(StreetViewTop)
                 .flat(true)
-                .rotation(245)
+                .rotation(90)
                 .title("Street View Top")
                 .snippet("University of Canberra")
         );
 
         final Marker StreetViewBottomMarker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ico_street))
                 .position(StreetViewBottom)
                 .flat(true)
-                .rotation(245)
+                .rotation(90)
                 .title("Street View Bottom")
                 .snippet("University of Canberra")
         );
@@ -196,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .add(new LatLng(-35.230926, 149.080354))
         );
 
-        Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
+        googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
                 .fillColor(0x303434F8)      // Hex code for blue
                 .add(
@@ -216,18 +208,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public View getInfoContents(Marker marker) {
                 View infoWindow = getLayoutInflater().inflate(R.layout.infowindow_with_image, null);
-                TextView title = (TextView) infoWindow.findViewById(R.id.textViewTitle);
-                TextView snippet = (TextView) infoWindow.findViewById(R.id.textViewSnippet);
-                ImageView image = (ImageView) infoWindow.findViewById(R.id.imageView);
+                TextView title = infoWindow.findViewById(R.id.textViewTitle);
+                TextView snippet = infoWindow.findViewById(R.id.textViewSnippet);
+                ImageView image = infoWindow.findViewById(R.id.imageView);
 
 
-                if (marker.getId().equals(ucMarker.getId())) {
-                    title.setText(marker.getTitle());
-                    snippet.setText(marker.getSnippet());
-                    image.setImageDrawable(getResources()
-                            .getDrawable(R.mipmap.ic_uc, getTheme()));
+                title.setText(marker.getTitle());
+                snippet.setText(marker.getSnippet());
+                if (marker.getId().equals(CentralLocationMarker.getId())) {
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ic_uc, getTheme()));
+                    url = "";
+                } else if(marker.getId().equals(LibraryMarker.getId())){
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_library, getTheme()));
+                    url = "http://www.canberra.edu.au/library";
+                } else if(marker.getId().equals(UCCooperLodgeMarker.getId())){
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_lodge, getTheme()));
+                    url = "http://www.unilodge.com.au/unilodge-uc-lodge-cooper-lodge/";
+                } else if(marker.getId().equals(StudentResourceCenterMarker.getId())){
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_src, getTheme()));
+                    url = "http://www.canberra.edu.au/current-students/canberra-students/student-centre/";
+                } else if(marker.getId().equals(TheHubMarker.getId())){
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_hub, getTheme()));
+                    url = "http://www.canberra.edu.au/maps/buildings-directory/the-hub/";
+                } else if(marker.getId().equals(UCGymMarker.getId())){
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_gym, getTheme()));
+                    url = "http://www.ucunion.com.au/gym/";
+                } else {
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_street, getTheme()));
                 }
-
 
                 return infoWindow;
             }
@@ -236,8 +244,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                startActivity(intent);
+                // If street View maker is tapped show street view
+                if(marker.getId().equals(StreetViewTopMarker.getId()) || marker.getId().equals(StreetViewBottomMarker.getId()) ){
+
+                }else {
+                    Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                    intent.putExtra("url", url);
+                    startActivity(intent);
+                }
             }
         });
 
