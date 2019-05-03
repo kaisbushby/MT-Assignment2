@@ -198,12 +198,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
-                .fillColor(0xffF9A825)      // Hex code for blue
+                .fillColor(0x303434F8)      // Hex code for blue
                 .add(
-                        new LatLng(-27.457, 153.040),
-                        new LatLng(-33.852, 151.211),
-                        new LatLng(-37.813, 144.962),
-                        new LatLng(-34.928, 138.599)));
+                        new LatLng(-35.230926, 149.080354),
+                        new LatLng(-35.234634, 149.091888),
+                        new LatLng(-35.242096, 149.090257),
+                        new LatLng(-35.2429721, 149.0736905),
+                        new LatLng(-35.230926, 149.080354)));
         //------------------------------------------------------------------------------------------
 
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -218,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 TextView title = (TextView) infoWindow.findViewById(R.id.textViewTitle);
                 TextView snippet = (TextView) infoWindow.findViewById(R.id.textViewSnippet);
                 ImageView image = (ImageView) infoWindow.findViewById(R.id.imageView);
+
 
                 if (marker.getId().equals(ucMarker.getId())) {
                     title.setText(marker.getTitle());
