@@ -14,15 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".StreetViewActivity"
-            android:label="@string/title_activity_street_view"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.u3175374.assignment2.MainActivity" />
-        </activity>
-        <activity
             android:name=".WebViewActivity"
             android:label="@string/title_activity_web_view"
             android:parentActivityName=".MainActivity"
@@ -44,7 +35,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA5rtPLgthtVfALGyDYphVcg2Tg0R4ntRE" />
+            android:value="YOUR KEY HERE" />
     </application>
 
 </manifest>

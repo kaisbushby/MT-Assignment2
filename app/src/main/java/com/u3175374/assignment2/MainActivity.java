@@ -85,15 +85,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        LatLng UC = new LatLng(-35.2384551,149.0844455);
-        LatLng CentralLocation = new LatLng(-35.238887, 149.084593);
+        final LatLng UC = new LatLng(-35.2384551,149.0844455);
+        final LatLng CentralLocation = new LatLng(-35.238887, 149.084593);
         final LatLng Library = new LatLng(-35.23803, 149.083405);
-        LatLng UCCooperLodge = new LatLng(-35.238849, 149.082214);
-        LatLng StudentResourceCenter = new LatLng(-35.236428, 149.084288);
-        LatLng TheHub = new LatLng(-35.23844,149.08452);
-        LatLng UCGYM = new LatLng(-35.238318, 149.088285);
+        final LatLng UCCooperLodge = new LatLng(-35.238849, 149.082214);
+        final LatLng StudentResourceCenter = new LatLng(-35.236428, 149.084288);
+        final LatLng TheHub = new LatLng(-35.23844,149.08452);
+        final LatLng UCGYM = new LatLng(-35.238318, 149.088285);
+        final LatLng UCHealthHub = new LatLng(-35.234695, 149.087681);
+        final LatLng MizzunaCafe = new LatLng(-35.238095, 149.084082);
         final LatLng StreetViewTop = new LatLng(-35.233653, 149.087192);
-        LatLng StreetViewBottom = new LatLng(-35.238516, 149.089560);
+        final LatLng StreetViewBottom = new LatLng(-35.238516, 149.089560);
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UC, 13));
 
@@ -113,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_library)))
                 .position(Library)
                 .flat(true)
-                .rotation(90)
                 .title("Library")
                 .snippet("University of Canberra")
         );
@@ -122,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_lodge)))
                 .position(UCCooperLodge)
                 .flat(true)
-                .rotation(90)
                 .title("Student Resource Center")
                 .snippet("University of Canberra")
         );
@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_src)))
                 .position(StudentResourceCenter)
                 .flat(true)
-                .rotation(90)
                 .title("Student Resource Center")
                 .snippet("University of Canberra")
         );
@@ -140,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_hub)))
                 .position(TheHub)
                 .flat(true)
-                .rotation(90)
                 .title("The Hub")
                 .snippet("University of Canberra")
         );
@@ -149,8 +147,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_gym)))
                 .position(UCGYM)
                 .flat(true)
-                .rotation(90)
                 .title("UC GYM")
+                .snippet("University of Canberra")
+        );
+
+        final Marker UCHealthHubMarker = googleMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_health)))
+                .position(UCHealthHub)
+                .flat(true)
+                .title("Health Hub")
+                .snippet("University of Canberra")
+        );
+
+        final Marker MizzunaCafeMarker = googleMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_cafe)))
+                .position(MizzunaCafe)
+                .flat(true)
+                .title("Mizzuna Cafe")
                 .snippet("University of Canberra")
         );
 
@@ -158,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_street)))
                 .position(StreetViewTop)
                 .flat(true)
-                .rotation(90)
                 .title("Street View Top")
                 .snippet("University of Canberra")
         );
@@ -167,17 +179,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(R.mipmap.ico_street)))
                 .position(StreetViewBottom)
                 .flat(true)
-                .rotation(90)
                 .title("Street View Bottom")
                 .snippet("University of Canberra")
         );
+
+
 
 
         //------------------------------------------------------------------------------------------
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(UC)
                 .zoom(15)
-                .bearing(90)
+                //.bearing(90)
                 .build();
 
         // Animate the change in camera view over 2 seconds
@@ -197,10 +210,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .fillColor(0x303434F8)      // Hex code for blue
                 .add(
                         new LatLng(-35.230926, 149.080354),
-                        new LatLng(-35.234634, 149.091888),
-                        new LatLng(-35.242096, 149.090257),
-                        new LatLng(-35.2429721, 149.0736905),
-                        new LatLng(-35.230926, 149.080354)));
+                        new LatLng(-35.231548, 149.083648),
+                        new LatLng(-35.233546, 149.087446),
+                        new LatLng(-35.234633, 149.091984),
+                        new LatLng(-35.239133, 149.090353),
+                        new LatLng(-35.240877, 149.090171),
+                        new LatLng(-35.242009, 149.090324),
+                        new LatLng(-35.242403, 149.088200),
+                        new LatLng(-35.242398, 149.077731),
+                        new LatLng(-35.242007, 149.076155),
+                        new LatLng(-35.240833, 149.074887),
+                        new LatLng(-35.237919, 149.076921),
+                        new LatLng(-35.233934, 149.078564),
+                        new LatLng(-35.232576, 149.079583),
+                        new LatLng(-35.230926, 149.080354)
+                ));
         //------------------------------------------------------------------------------------------
 
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -234,12 +258,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else if(marker.getId().equals(TheHubMarker.getId())){
                     image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_hub, getTheme()));
                     url = "http://www.canberra.edu.au/maps/buildings-directory/the-hub/";
-                } else if(marker.getId().equals(UCGymMarker.getId())){
+                } else if(marker.getId().equals(UCGymMarker.getId())) {
                     image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_gym, getTheme()));
                     url = "http://www.ucunion.com.au/gym/";
+                }else if(marker.getId().equals(UCHealthHubMarker.getId())) {
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_health, getTheme()));
+                    url = "https://www.canberra.edu.au/on-campus/campus-development/precincts-and-projects/health-precinct/health-hub";
+                } else if(marker.getId().equals(MizzunaCafeMarker.getId())) {
+                image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_cafe, getTheme()));
+                url = "http://www.ucunion.com.au/gym/";
                 } else
                     image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_street, getTheme()));
-                
+
                 return infoWindow;
             }
         });
