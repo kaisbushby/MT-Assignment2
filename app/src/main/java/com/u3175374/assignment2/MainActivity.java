@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -184,26 +185,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         );
 
 
-
-
         //------------------------------------------------------------------------------------------
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(UC)
                 .zoom(15)
-                //.bearing(90)
                 .build();
 
         // Animate the change in camera view over 2 seconds
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),
                 2000, null);
 
-        googleMap.addPolyline(new PolylineOptions().geodesic(true)
-                .add(new LatLng(-35.230926, 149.080354))
-                .add(new LatLng(-35.234634, 149.091888))
-                .add(new LatLng(-35.242096, 149.090257))
-                .add(new LatLng(-35.2429721, 149.0736905))
-                .add(new LatLng(-35.230926, 149.080354))
-        );
 
         googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
@@ -270,6 +261,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else
                     image.setImageDrawable(getResources().getDrawable(R.mipmap.ico_street, getTheme()));
 
+                // Makes Toast of corresponding title if tapped
+                Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
                 return infoWindow;
             }
         });
@@ -277,9 +270,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                // Makes Toast of corresponding title if tapped
-                Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
-
                 // If street View maker is tapped show street view
                 if(marker.getId().equals(StreetViewTopMarker.getId()) || marker.getId().equals(StreetViewBottomMarker.getId()) ){
                     Intent intent = new Intent(MainActivity.this, StreetViewActivity.class);
